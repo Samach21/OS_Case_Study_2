@@ -1,0 +1,15 @@
+E:\OS\OS_Case_Study_2\bin\Debug\net6.0\OS_Case_Study_2.exe
+E:\OS\OS_Case_Study_2\bin\Debug\net6.0\OS_Case_Study_2.deps.json
+E:\OS\OS_Case_Study_2\bin\Debug\net6.0\OS_Case_Study_2.runtimeconfig.json
+E:\OS\OS_Case_Study_2\bin\Debug\net6.0\OS_Case_Study_2.dll
+E:\OS\OS_Case_Study_2\bin\Debug\net6.0\OS_Case_Study_2.pdb
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.csproj.AssemblyReference.cache
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.GeneratedMSBuildEditorConfig.editorconfig
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.AssemblyInfoInputs.cache
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.AssemblyInfo.cs
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.csproj.CoreCompileInputs.cache
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.dll
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\refint\OS_Case_Study_2.dll
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.pdb
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\OS_Case_Study_2.genruntimeconfig.cache
+E:\OS\OS_Case_Study_2\obj\Debug\net6.0\ref\OS_Case_Study_2.dll
