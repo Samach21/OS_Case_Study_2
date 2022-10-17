@@ -74,11 +74,30 @@ namespace OS_Problem_02
 
             for (i = 100; i < 151; i++)
             {
-                s.WaitOne();
-                EnQueue(i);
-                Thread.Sleep(5);
-                lock (_Lock) { 
-                    Monitor.Pulse(_Lock);
+                lock (_Lock) {
+                    while (Count >= 10){
+                        Monitor.Wait(_Lock);
+                    }
+                    EnQueue(i);
+                    Thread.Sleep(5);
+                    if (Count != 0) {
+                        // s.Dispose();
+                        // Console.Write("s={0}, ", s);
+                        try {
+                            s.Release();
+                        }
+                        catch {
+
+                        }
+                    }
+                }
+            }
+            while (Count > 0){
+                try {
+                    s.Release();
+                }
+                catch {
+
                 }
             }
         }
@@ -105,13 +124,13 @@ namespace OS_Problem_02
         static void Main(string[] args)
         {
             Thread t1 = new Thread(th01);
-            //Thread t11 = new Thread(th011);
+            Thread t11 = new Thread(th011);
             Thread t2 = new Thread(()=>th02(1));
             Thread t21 = new Thread(()=>th02(2));
             Thread t22 = new Thread(()=>th02(3));
 
             t1.Start();
-            //t11.Start();
+            t11.Start();
             t2.Start();
             t21.Start();
             t22.Start();
