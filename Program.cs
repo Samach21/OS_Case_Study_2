@@ -39,7 +39,9 @@ namespace OS_Problem_02
 
             for (i = 1; i < 51; i++)
             {
+                lock (_Lock) {
                     while (Count >= 10){
+                        Monitor.Wait(_Lock);
                     }
                     EnQueue(i);
                     Thread.Sleep(5);
@@ -53,6 +55,7 @@ namespace OS_Problem_02
 
                         }
                     }
+                }
             }
             while (Count > 0){
                 try {
@@ -89,11 +92,14 @@ namespace OS_Problem_02
             {
                 if (!isEnd)
                     s.WaitOne();
-                j = DeQueue();
-                if (j == -1)
-                    return;
-                Console.WriteLine("j={0}, thread:{1}", j, t);
-                Thread.Sleep(100);
+                lock (_Lock) {
+                    j = DeQueue();
+                    if (j == -1)
+                        return;
+                    Console.WriteLine("j={0}, thread:{1}", j, t);
+                    Thread.Sleep(100);
+                    Monitor.Pulse(_Lock);
+                }
             }
         }
         static void Main(string[] args)
@@ -102,13 +108,13 @@ namespace OS_Problem_02
             //Thread t11 = new Thread(th011);
             Thread t2 = new Thread(()=>th02(1));
             Thread t21 = new Thread(()=>th02(2));
-            //Thread t22 = new Thread(th02);
+            Thread t22 = new Thread(()=>th02(3));
 
             t1.Start();
             //t11.Start();
             t2.Start();
             t21.Start();
-            //t22.Start(3);
+            t22.Start();
         }
     }
 }
