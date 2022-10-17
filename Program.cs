@@ -9,6 +9,9 @@ namespace OS_Problem_02
         static int Front = 0;
         static int Back = 0;
         static int Count = 0;
+        static object _Lock = new object();
+        static Semaphore s = new Semaphore(0, 1);
+        static bool isEnd = false;
 
         static void EnQueue(int eq)
         {
@@ -20,6 +23,8 @@ namespace OS_Problem_02
 
         static int DeQueue()
         {
+            if (Front == Back)
+                return -1;
             int x = 0;
             x = TSBuffer[Front];
             Front++;
@@ -34,8 +39,14 @@ namespace OS_Problem_02
 
             for (i = 1; i < 51; i++)
             {
-                EnQueue(i);
-                Thread.Sleep(5);
+                lock (_Lock) { 
+                    EnQueue(i);
+                    Thread.Sleep(5);
+                    if (i == 50)
+                        isEnd = true;
+                    s.Release();
+                    Monitor.Wait(_Lock);
+                }
             }
         }
 
@@ -45,22 +56,32 @@ namespace OS_Problem_02
 
             for (i = 100; i < 151; i++)
             {
-                EnQueue(i);
-                Thread.Sleep(5);
+                s.WaitOne();
+                lock (_Lock) { 
+                    EnQueue(i);
+                    Thread.Sleep(5);
+                    Monitor.Pulse(_Lock);
+                }
             }
         }
-
 
         static void th02(object t)
         {
             int i;
             int j;
 
-            for (i=0; i< 60; i++)
+            for (i=0; i < 60; i++)
             {
-                j = DeQueue();
-                Console.WriteLine("j={0}, thread:{1}", j, t);
-                Thread.Sleep(100);
+                if (!isEnd)
+                    s.WaitOne();
+                lock (_Lock) { 
+                    j = DeQueue();
+                    if (j == -1)
+                        return;
+                    Console.WriteLine("j={0}, thread:{1}", j, t);
+                    Thread.Sleep(100);
+                    Monitor.Pulse(_Lock);
+                }
             }
         }
         static void Main(string[] args)
