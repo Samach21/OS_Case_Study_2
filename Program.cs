@@ -41,7 +41,7 @@ namespace OS_Problem_02
             {
                 lock (_Lock) {
                     while (Count >= 10){
-                        Monitor.Wait(_Lock);
+                        // Monitor.Wait(_Lock);
                     }
                     EnQueue(i);
                     Thread.Sleep(5);
@@ -76,7 +76,7 @@ namespace OS_Problem_02
             {
                 lock (_Lock) {
                     while (Count >= 10){
-                        Monitor.Wait(_Lock);
+                        // Monitor.Wait(_Lock);
                     }
                     EnQueue(i);
                     Thread.Sleep(5);
@@ -111,14 +111,14 @@ namespace OS_Problem_02
             {
                 if (!isEnd)
                     s.WaitOne();
-                lock (_Lock) {
+                // lock (_Lock) {
                     j = DeQueue();
                     if (j == -1)
                         return;
                     Console.WriteLine("j={0}, thread:{1}", j, t);
                     Thread.Sleep(100);
-                    Monitor.Pulse(_Lock);
-                }
+                //     Monitor.Pulse(_Lock);
+                // }
             }
         }
         static void Main(string[] args)
